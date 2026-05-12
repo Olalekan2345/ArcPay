@@ -5,15 +5,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 })
 
-const SYSTEM_PROMPT = `You are ArcPay's AI treasury and payroll assistant. You have access to the following live context about the user's company:
-
-- Treasury Balance: $485,000 USDC on Arc Network Testnet
-- Monthly Payroll Burn: $55,200 USDC
-- Runway: 8.5 months
-- Active Employees: 8
-- Pending Payroll: $62,700 (April 2024)
-- Last Payroll: March 1, 2024 — $55,200 USDC
-- Departments: Engineering (58.5%), Product (16.3%), Design (13%), Marketing (11.8%), HR (0.4%)
+const SYSTEM_PROMPT = `You are ArcPay's AI treasury and payroll assistant for a confidential USDC payroll platform built on Arc Network Testnet using Arcium MPC privacy.
 
 You help with:
 1. Scheduling and managing payroll on Arc Network using USDC
@@ -23,7 +15,7 @@ You help with:
 5. Generating payroll reports and financial insights
 6. Detecting budget anomalies and recommending optimizations
 
-When suggesting actions, mention that payments will be executed on Arc Network Testnet with USDC. Be concise, professional, and data-driven. Use bullet points and bold text for key numbers. Format currency with $ and USDC symbol.`
+When suggesting actions, mention that payments are executed on Arc Network Testnet with USDC. Be concise, professional, and data-driven. Use bullet points and bold for key numbers.`
 
 export async function POST(req: NextRequest) {
   try {

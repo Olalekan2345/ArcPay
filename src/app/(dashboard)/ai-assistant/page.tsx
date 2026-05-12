@@ -24,7 +24,7 @@ const quickPrompts = [
 ]
 
 export default function AIAssistantPage() {
-  const { employees, totalMonthlyPayroll, avgSalary, departments } = useEmployees()
+  const { employees, totalMonthlyPayroll, avgSalary, departments, loading: empLoading } = useEmployees()
   const { formattedUSDC, isConnected, address } = useWallet()
   const { getHistory } = usePayrollHistory()
 
@@ -52,11 +52,7 @@ Answer questions about payroll, treasury management, team structure, and USDC co
     {
       id: '0',
       role: 'assistant',
-      content: `Hello! I'm your ArcPay AI assistant powered by GPT-4o. I have access to your live treasury data on Arc Network Testnet.\n\n${
-        isConnected
-          ? `Your wallet has **${formattedUSDC} USDC** and you have **${employees.length} employee${employees.length !== 1 ? 's' : ''}** with a monthly payroll of **$${totalMonthlyPayroll.toLocaleString()} USDC**.`
-          : 'Connect your wallet to get personalized payroll and treasury insights.'
-      }\n\nHow can I help you today?`,
+      content: `Hello! I'm your ArcPay AI assistant powered by GPT-4o.\n\nI have real-time access to your treasury balance, employee payroll, and Arc Network Testnet data. Ask me anything about your payroll, team, or treasury.\n\nHow can I help you today?`,
       timestamp: new Date(),
     },
   ])
@@ -69,7 +65,7 @@ Answer questions about payroll, treasury management, team structure, and USDC co
   }, [messages, loading])
 
   const sendMessage = async (text: string) => {
-    if (!text.trim() || loading) return
+    if (!text.trim() || loading || empLoading) return
 
     const userMsg: Message = {
       id: Date.now().toString(),
@@ -84,15 +80,17 @@ Answer questions about payroll, treasury management, team structure, and USDC co
     setLoading(true)
 
     try {
+      // Skip the static initial greeting (id '0') — only send real conversation turns
+      const conversationTurns = updatedMessages
+        .filter(m => m.id !== '0')
+        .map(m => ({ role: m.role, content: m.content }))
+
       const res = await fetch('/api/ai', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           systemContext,
-          messages: updatedMessages.map(m => ({
-            role: m.role,
-            content: m.content,
-          })),
+          messages: conversationTurns,
         }),
       })
 
@@ -188,7 +186,7 @@ Answer questions about payroll, treasury management, team structure, and USDC co
               <button
                 key={text}
                 onClick={() => sendMessage(text)}
-                disabled={loading}
+                disabled={loading || empLoading}
                 className="flex items-center gap-2 px-3 py-2 rounded-lg glass border border-white/[0.08] text-xs text-white/50 hover:text-white hover:border-white/[0.16] transition-all whitespace-nowrap flex-shrink-0 disabled:opacity-40"
               >
                 <Icon className="w-3 h-3" />
@@ -207,14 +205,14 @@ Answer questions about payroll, treasury management, team structure, and USDC co
                 <input
                   value={input}
                   onChange={e => setInput(e.target.value)}
-                  placeholder="Ask about payroll, treasury, employees, or conversions..."
+                  placeholder={empLoading ? 'Loading your data...' : 'Ask about payroll, treasury, employees, or conversions...'}
                   className="w-full bg-transparent text-sm text-white placeholder-white/25 outline-none"
-                  disabled={loading}
+                  disabled={loading || empLoading}
                 />
               </div>
               <button
                 type="submit"
-                disabled={!input.trim() || loading}
+                disabled={!input.trim() || loading || empLoading}
                 className="w-11 h-11 rounded-xl gradient-bg-primary flex items-center justify-center shadow-glow-sm hover:opacity-90 transition-all disabled:opacity-40"
               >
                 <Send className="w-4 h-4 text-white" />
