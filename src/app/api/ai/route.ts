@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import OpenAI from 'openai'
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+const groq = new OpenAI({
+  apiKey: process.env.GROQ_API_KEY,
+  baseURL: 'https://api.groq.com/openai/v1',
 })
 
 const SYSTEM_PROMPT = `You are ArcPay's AI treasury and payroll assistant for a confidential USDC payroll platform built on Arc Network Testnet using Arcium MPC privacy.
@@ -21,19 +22,19 @@ export async function POST(req: NextRequest) {
   try {
     const { messages, systemContext } = await req.json()
 
-    if (!process.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY.startsWith('sk-YOUR')) {
+    if (!process.env.GROQ_API_KEY || process.env.GROQ_API_KEY.startsWith('gsk_YOUR')) {
       return NextResponse.json({
-        content: "⚠️ OpenAI API key not configured. Add your OPENAI_API_KEY to .env.local to enable the real AI assistant.",
+        content: "⚠️ Groq API key not configured. Add your GROQ_API_KEY to Vercel environment variables to enable the AI assistant. Get a free key at console.groq.com — no credit card required.",
       })
     }
 
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+    const completion = await groq.chat.completions.create({
+      model: 'llama-3.3-70b-versatile',
       messages: [
         { role: 'system', content: systemContext || SYSTEM_PROMPT },
         ...messages,
       ],
-      max_tokens: 400,
+      max_tokens: 500,
       temperature: 0.7,
     })
 

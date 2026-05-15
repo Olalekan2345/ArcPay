@@ -52,7 +52,7 @@ Answer questions about payroll, treasury management, team structure, and USDC co
     {
       id: '0',
       role: 'assistant',
-      content: `Hello! I'm your ArcPay AI assistant powered by GPT-4o.\n\nI have real-time access to your treasury balance, employee payroll, and Arc Network Testnet data. Ask me anything about your payroll, team, or treasury.\n\nHow can I help you today?`,
+      content: `Hello! I'm your ArcPay AI assistant powered by Llama 3.3 70B via Groq.\n\nI have real-time access to your treasury balance, employee payroll, and Arc Network Testnet data. Ask me anything about your payroll, team, or treasury.\n\nHow can I help you today?`,
       timestamp: new Date(),
     },
   ])
@@ -118,7 +118,7 @@ Answer questions about payroll, treasury management, team structure, and USDC co
     <div className="flex flex-col h-screen">
       <Header
         title="AI Assistant"
-        subtitle="Powered by GPT-4o · Connected to live treasury data"
+        subtitle="Powered by Llama 3.3 70B (Groq) · Connected to live treasury data"
       />
 
       <div className="flex flex-1 overflow-hidden">
@@ -264,10 +264,10 @@ Answer questions about payroll, treasury management, team structure, and USDC co
 
           <div className={`glass rounded-xl border p-3 ${isConnected ? 'border-green-500/15 bg-green-500/5' : 'border-amber-500/15 bg-amber-500/5'}`}>
             <div className={`text-[10px] font-semibold mb-1 ${isConnected ? 'text-green-400' : 'text-amber-400'}`}>
-              {isConnected ? 'GPT-4o Connected' : 'Wallet Not Connected'}
+              {isConnected ? 'Groq AI Connected' : 'Wallet Not Connected'}
             </div>
             <div className="text-[10px] text-white/40">
-              {isConnected ? 'Real AI responses via OpenAI API' : 'Connect wallet for full context'}
+              {isConnected ? 'Llama 3.3 70B via Groq API' : 'Connect wallet for full context'}
             </div>
           </div>
         </div>
