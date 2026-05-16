@@ -10,7 +10,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'var(--font-inter)', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'var(--font-mono)', 'monospace'],
       },
       colors: {
         border: 'hsl(var(--border))',
@@ -23,6 +24,27 @@ const config: Config = {
         destructive: { DEFAULT: 'hsl(var(--destructive))', foreground: 'hsl(var(--destructive-foreground))' },
         muted: { DEFAULT: 'hsl(var(--muted))', foreground: 'hsl(var(--muted-foreground))' },
         accent: { DEFAULT: 'hsl(var(--accent))', foreground: 'hsl(var(--accent-foreground))' },
+        // ZeroPay brand palette (blue)
+        brand: {
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
+        },
+        // ZeroPay surface palette (neutral/slate)
+        surface: {
+          50: '#f8fafc',
+          100: '#f1f5f9',
+          200: '#e2e8f0',
+          300: '#cbd5e1',
+          400: '#94a3b8',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -72,12 +94,12 @@ const config: Config = {
         },
       },
       boxShadow: {
-        'glow-sm': '0 0 20px rgba(139,92,246,0.2)',
-        'glow-md': '0 0 40px rgba(139,92,246,0.25)',
-        'glow-lg': '0 0 60px rgba(139,92,246,0.3)',
-        'glow-blue': '0 0 40px rgba(96,165,250,0.2)',
-        'card': '0 4px 24px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.05)',
-        'card-hover': '0 8px 40px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.08)',
+        'glow-sm': '0 2px 12px rgba(37,99,235,0.15)',
+        'glow-md': '0 4px 24px rgba(37,99,235,0.2)',
+        'glow-lg': '0 8px 40px rgba(37,99,235,0.25)',
+        'glow-blue': '0 4px 20px rgba(37,99,235,0.15)',
+        'card': '0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)',
+        'card-hover': '0 4px 16px rgba(0,0,0,0.1), 0 2px 6px rgba(0,0,0,0.06)',
       },
     },
   },

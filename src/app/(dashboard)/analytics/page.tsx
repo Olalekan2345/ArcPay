@@ -17,9 +17,9 @@ const COLORS = ['#6366f1', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ef4444'
 const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: { value: number; name?: string }[]; label?: string }) => {
   if (active && payload?.length) {
     return (
-      <div className="glass-strong rounded-lg border border-white/[0.08] px-3 py-2">
-        <p className="text-xs text-white/50 mb-1">{label}</p>
-        <p className="text-sm font-semibold text-white">${payload[0].value.toLocaleString()}</p>
+      <div className="glass-strong rounded-lg border border-slate-200 px-3 py-2">
+        <p className="text-xs text-slate-500 mb-1">{label}</p>
+        <p className="text-sm font-semibold text-slate-900">${payload[0].value.toLocaleString()}</p>
       </div>
     )
   }
@@ -105,14 +105,14 @@ export default function AnalyticsPage() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.07 }}
-              className="glass rounded-xl border border-white/[0.06] p-5"
+              className="glass rounded-xl border border-slate-100 p-5"
             >
               <div className="flex items-start justify-between mb-3">
-                <Icon className="w-4 h-4 text-white/30" />
+                <Icon className="w-4 h-4 text-slate-400" />
               </div>
-              <div className="text-2xl font-bold text-white">{value}</div>
-              <div className="text-xs text-white/40 mt-0.5">{label}</div>
-              <div className="text-[10px] text-white/25 mt-0.5">{sub}</div>
+              <div className="text-2xl font-bold text-slate-900">{value}</div>
+              <div className="text-xs text-slate-400 mt-0.5">{label}</div>
+              <div className="text-[10px] text-slate-300 mt-0.5">{sub}</div>
             </motion.div>
           ))}
         </div>
@@ -122,38 +122,38 @@ export default function AnalyticsPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="glass rounded-2xl border border-violet-500/20 bg-violet-500/5 p-5"
+          className="glass rounded-2xl border border-violet-200 bg-violet-50 p-5"
         >
           <div className="flex items-center gap-2 mb-3">
-            <Brain className="w-4 h-4 text-violet-400" />
-            <span className="text-sm font-semibold text-white">AI Insights</span>
-            <span className="text-[10px] text-violet-400 border border-violet-500/30 rounded-full px-1.5 py-0.5">GPT-4o</span>
+            <Brain className="w-4 h-4 text-violet-600" />
+            <span className="text-sm font-semibold text-slate-900">AI Insights</span>
+            <span className="text-[10px] text-violet-600 border border-violet-200 rounded-full px-1.5 py-0.5">GPT-4o</span>
           </div>
           <div className="grid md:grid-cols-3 gap-3">
             {employees.length === 0 ? (
               <>
-                <div className="p-3.5 rounded-xl border border-blue-500/20 bg-blue-500/5 text-xs text-white/60 leading-relaxed">
+                <div className="p-3.5 rounded-xl border border-brand-200 bg-brand-50 text-xs text-slate-500 leading-relaxed">
                   Once you add employees and run payroll, AI will analyze your spend patterns and flag anomalies automatically.
                 </div>
-                <div className="p-3.5 rounded-xl border border-green-500/20 bg-green-500/5 text-xs text-white/60 leading-relaxed">
+                <div className="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50 text-xs text-slate-500 leading-relaxed">
                   Treasury runway calculations appear here after connecting your wallet and running your first payroll cycle.
                 </div>
-                <div className="p-3.5 rounded-xl border border-blue-500/20 bg-blue-500/5 text-xs text-white/60 leading-relaxed">
+                <div className="p-3.5 rounded-xl border border-brand-200 bg-brand-50 text-xs text-slate-500 leading-relaxed">
                   Department-level payroll breakdowns and benchmark comparisons will be generated as your team grows.
                 </div>
               </>
             ) : (
               <>
-                <div className="p-3.5 rounded-xl border border-blue-500/20 bg-blue-500/5 text-xs text-white/60 leading-relaxed">
-                  Your largest department by payroll is <span className="text-white font-medium">{deptData.sort((a, b) => b.value - a.value)[0]?.name || 'N/A'}</span>. Consider budget allocation as you scale.
+                <div className="p-3.5 rounded-xl border border-brand-200 bg-brand-50 text-xs text-slate-500 leading-relaxed">
+                  Your largest department by payroll is <span className="text-slate-900 font-medium">{deptData.sort((a, b) => b.value - a.value)[0]?.name || 'N/A'}</span>. Consider budget allocation as you scale.
                 </div>
-                <div className={`p-3.5 rounded-xl border text-xs text-white/60 leading-relaxed ${totalRuns > 0 ? 'border-green-500/20 bg-green-500/5' : 'border-amber-500/20 bg-amber-500/5'}`}>
+                <div className={`p-3.5 rounded-xl border text-xs text-slate-500 leading-relaxed ${totalRuns > 0 ? 'border-emerald-200 bg-emerald-50' : 'border-amber-200 bg-amber-50'}`}>
                   {totalRuns > 0
                     ? `${totalRuns} payroll run${totalRuns !== 1 ? 's' : ''} completed. Total USDC distributed: $${ytdPayroll.toLocaleString()}.`
                     : 'No payroll runs yet. Head to the Payroll tab to process your first USDC disbursement.'}
                 </div>
-                <div className="p-3.5 rounded-xl border border-blue-500/20 bg-blue-500/5 text-xs text-white/60 leading-relaxed">
-                  Average salary is <span className="text-white font-medium">${avgSalary.toLocaleString()}/mo</span> across {employees.length} employee{employees.length !== 1 ? 's' : ''} in {departments} department{departments !== 1 ? 's' : ''}.
+                <div className="p-3.5 rounded-xl border border-brand-200 bg-brand-50 text-xs text-slate-500 leading-relaxed">
+                  Average salary is <span className="text-slate-900 font-medium">${avgSalary.toLocaleString()}/mo</span> across {employees.length} employee{employees.length !== 1 ? 's' : ''} in {departments} department{departments !== 1 ? 's' : ''}.
                 </div>
               </>
             )}
@@ -167,25 +167,25 @@ export default function AnalyticsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="glass rounded-2xl border border-white/[0.06] p-6"
+            className="glass rounded-2xl border border-slate-100 p-6"
           >
-            <div className="text-sm font-semibold text-white mb-1">Payroll History</div>
-            <div className="text-xs text-white/40 mb-6">USDC paid per run</div>
+            <div className="text-sm font-semibold text-slate-900 mb-1">Payroll History</div>
+            <div className="text-xs text-slate-400 mb-6">USDC paid per run</div>
             {runChartData.length > 0 ? (
               <ResponsiveContainer width="100%" height={160}>
                 <BarChart data={runChartData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
-                  <XAxis dataKey="name" tick={{ fill: 'rgba(255,255,255,0.3)', fontSize: 11 }} axisLine={false} tickLine={false} />
-                  <YAxis tick={{ fill: 'rgba(255,255,255,0.3)', fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={v => `$${v >= 1000 ? `${(v/1000).toFixed(0)}K` : v}`} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(148,163,184,0.15)" />
+                  <XAxis dataKey="name" tick={{ fill: 'rgba(100,116,139,0.7)', fontSize: 11 }} axisLine={false} tickLine={false} />
+                  <YAxis tick={{ fill: 'rgba(100,116,139,0.7)', fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={v => `$${v >= 1000 ? `${(v/1000).toFixed(0)}K` : v}`} />
                   <Tooltip content={<CustomTooltip />} />
-                  <Bar dataKey="amount" fill="#6366f1" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="amount" fill="#2563eb" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             ) : (
-              <div className="flex flex-col items-center justify-center h-40 border border-dashed border-white/[0.06] rounded-xl">
-                <BarChart3 className="w-8 h-8 text-white/10 mb-2" />
-                <div className="text-xs text-white/20">No data yet</div>
-                <div className="text-[10px] text-white/15 mt-0.5">Charts appear after first payroll run</div>
+              <div className="flex flex-col items-center justify-center h-40 border border-dashed border-slate-200 rounded-xl">
+                <BarChart3 className="w-8 h-8 text-slate-200 mb-2" />
+                <div className="text-xs text-slate-300">No data yet</div>
+                <div className="text-[10px] text-slate-200 mt-0.5">Charts appear after first payroll run</div>
               </div>
             )}
           </motion.div>
@@ -195,10 +195,10 @@ export default function AnalyticsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35 }}
-            className="glass rounded-2xl border border-white/[0.06] p-6"
+            className="glass rounded-2xl border border-slate-100 p-6"
           >
-            <div className="text-sm font-semibold text-white mb-1">Payroll by Department</div>
-            <div className="text-xs text-white/40 mb-6">Monthly USDC allocation</div>
+            <div className="text-sm font-semibold text-slate-900 mb-1">Payroll by Department</div>
+            <div className="text-xs text-slate-400 mb-6">Monthly USDC allocation</div>
             {deptData.length > 0 ? (
               <ResponsiveContainer width="100%" height={160}>
                 <PieChart>
@@ -207,15 +207,15 @@ export default function AnalyticsPage() {
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
-                  <Tooltip formatter={(value: number) => [`$${value.toLocaleString()}`, 'Payroll']} contentStyle={{ backgroundColor: '#0d0e1a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
-                  <Legend iconType="circle" iconSize={8} formatter={(v) => <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: '11px' }}>{v}</span>} />
+                  <Tooltip formatter={(value: number) => [`$${value.toLocaleString()}`, 'Payroll']} contentStyle={{ backgroundColor: '#ffffff', border: '1px solid rgba(148,163,184,0.2)', borderRadius: '8px', color: '#0f172a', fontSize: '12px' }} />
+                  <Legend iconType="circle" iconSize={8} formatter={(v) => <span style={{ color: 'rgba(100,116,139,0.8)', fontSize: '11px' }}>{v}</span>} />
                 </PieChart>
               </ResponsiveContainer>
             ) : (
-              <div className="flex flex-col items-center justify-center h-40 border border-dashed border-white/[0.06] rounded-xl">
-                <BarChart3 className="w-8 h-8 text-white/10 mb-2" />
-                <div className="text-xs text-white/20">No data yet</div>
-                <div className="text-[10px] text-white/15 mt-0.5">Add employees to see breakdown</div>
+              <div className="flex flex-col items-center justify-center h-40 border border-dashed border-slate-200 rounded-xl">
+                <BarChart3 className="w-8 h-8 text-slate-200 mb-2" />
+                <div className="text-xs text-slate-300">No data yet</div>
+                <div className="text-[10px] text-slate-200 mt-0.5">Add employees to see breakdown</div>
               </div>
             )}
           </motion.div>
@@ -225,25 +225,25 @@ export default function AnalyticsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="glass rounded-2xl border border-white/[0.06] p-6"
+            className="glass rounded-2xl border border-slate-100 p-6"
           >
-            <div className="text-sm font-semibold text-white mb-1">Salary Distribution</div>
-            <div className="text-xs text-white/40 mb-6">Headcount by salary range (USDC/mo)</div>
+            <div className="text-sm font-semibold text-slate-900 mb-1">Salary Distribution</div>
+            <div className="text-xs text-slate-400 mb-6">Headcount by salary range (USDC/mo)</div>
             {employees.length > 0 ? (
               <ResponsiveContainer width="100%" height={160}>
                 <BarChart data={salaryRanges}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
-                  <XAxis dataKey="range" tick={{ fill: 'rgba(255,255,255,0.3)', fontSize: 11 }} axisLine={false} tickLine={false} />
-                  <YAxis allowDecimals={false} tick={{ fill: 'rgba(255,255,255,0.3)', fontSize: 11 }} axisLine={false} tickLine={false} />
-                  <Tooltip contentStyle={{ backgroundColor: '#0d0e1a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px', color: '#fff', fontSize: '12px' }} formatter={(v: number) => [v, 'Employees']} />
-                  <Bar dataKey="count" fill="#8b5cf6" radius={[4, 4, 0, 0]} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(148,163,184,0.15)" />
+                  <XAxis dataKey="range" tick={{ fill: 'rgba(100,116,139,0.7)', fontSize: 11 }} axisLine={false} tickLine={false} />
+                  <YAxis allowDecimals={false} tick={{ fill: 'rgba(100,116,139,0.7)', fontSize: 11 }} axisLine={false} tickLine={false} />
+                  <Tooltip contentStyle={{ backgroundColor: '#ffffff', border: '1px solid rgba(148,163,184,0.2)', borderRadius: '8px', color: '#0f172a', fontSize: '12px' }} formatter={(v: number) => [v, 'Employees']} />
+                  <Bar dataKey="count" fill="#7c3aed" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             ) : (
-              <div className="flex flex-col items-center justify-center h-40 border border-dashed border-white/[0.06] rounded-xl">
-                <BarChart3 className="w-8 h-8 text-white/10 mb-2" />
-                <div className="text-xs text-white/20">No data yet</div>
-                <div className="text-[10px] text-white/15 mt-0.5">Add employees to see distribution</div>
+              <div className="flex flex-col items-center justify-center h-40 border border-dashed border-slate-200 rounded-xl">
+                <BarChart3 className="w-8 h-8 text-slate-200 mb-2" />
+                <div className="text-xs text-slate-300">No data yet</div>
+                <div className="text-[10px] text-slate-200 mt-0.5">Add employees to see distribution</div>
               </div>
             )}
           </motion.div>
@@ -253,10 +253,10 @@ export default function AnalyticsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.45 }}
-            className="glass rounded-2xl border border-white/[0.06] p-6"
+            className="glass rounded-2xl border border-slate-100 p-6"
           >
-            <div className="text-sm font-semibold text-white mb-1">Department Summary</div>
-            <div className="text-xs text-white/40 mb-6">Headcount and payroll by department</div>
+            <div className="text-sm font-semibold text-slate-900 mb-1">Department Summary</div>
+            <div className="text-xs text-slate-400 mb-6">Headcount and payroll by department</div>
             {deptData.length > 0 ? (
               <div className="space-y-3">
                 {deptData.sort((a, b) => b.value - a.value).slice(0, 6).map(({ name, value }, i) => {
@@ -267,12 +267,12 @@ export default function AnalyticsPage() {
                       <div className="flex items-center justify-between mb-1.5">
                         <div className="flex items-center gap-2">
                           <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: COLORS[i % COLORS.length] }} />
-                          <span className="text-xs text-white/60">{name}</span>
-                          <span className="text-[10px] text-white/30">{count} emp</span>
+                          <span className="text-xs text-slate-500">{name}</span>
+                          <span className="text-[10px] text-slate-400">{count} emp</span>
                         </div>
-                        <span className="text-xs font-semibold text-white">${value.toLocaleString()}/mo</span>
+                        <span className="text-xs font-semibold text-slate-900">${value.toLocaleString()}/mo</span>
                       </div>
-                      <div className="w-full bg-white/[0.05] rounded-full h-1.5">
+                      <div className="w-full bg-slate-100 rounded-full h-1.5">
                         <div className="h-1.5 rounded-full" style={{ width: `${pct}%`, backgroundColor: COLORS[i % COLORS.length] }} />
                       </div>
                     </div>
@@ -280,10 +280,10 @@ export default function AnalyticsPage() {
                 })}
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center h-40 border border-dashed border-white/[0.06] rounded-xl">
-                <BarChart3 className="w-8 h-8 text-white/10 mb-2" />
-                <div className="text-xs text-white/20">No data yet</div>
-                <div className="text-[10px] text-white/15 mt-0.5">Add employees to see breakdown</div>
+              <div className="flex flex-col items-center justify-center h-40 border border-dashed border-slate-200 rounded-xl">
+                <BarChart3 className="w-8 h-8 text-slate-200 mb-2" />
+                <div className="text-xs text-slate-300">No data yet</div>
+                <div className="text-[10px] text-slate-200 mt-0.5">Add employees to see breakdown</div>
               </div>
             )}
           </motion.div>

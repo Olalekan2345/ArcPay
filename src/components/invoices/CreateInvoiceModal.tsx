@@ -70,7 +70,7 @@ export default function CreateInvoiceModal({ onClose, onSave, initial }: Props) 
         className="fixed inset-0 z-[100] flex items-center justify-center p-4"
         onClick={onClose}
       >
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" />
 
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 16 }}
@@ -78,14 +78,14 @@ export default function CreateInvoiceModal({ onClose, onSave, initial }: Props) 
           exit={{ opacity: 0, scale: 0.95, y: 16 }}
           transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
           onClick={e => e.stopPropagation()}
-          className="relative w-full max-w-lg glass-strong rounded-2xl border border-white/[0.1] shadow-[0_0_80px_rgba(99,102,241,0.12)] overflow-hidden max-h-[90vh] flex flex-col"
+          className="relative w-full max-w-lg glass-strong rounded-2xl border border-slate-200 shadow-[0_0_80px_rgba(37,99,235,0.08)] overflow-hidden max-h-[90vh] flex flex-col"
         >
-          <div className="flex items-center justify-between px-6 py-5 border-b border-white/[0.07] flex-shrink-0">
+          <div className="flex items-center justify-between px-6 py-5 border-b border-slate-100 flex-shrink-0">
             <div>
-              <h2 className="text-base font-semibold text-white">{initial ? 'Edit Invoice' : 'New Invoice'}</h2>
-              <p className="text-xs text-white/40 mt-0.5">Bill your client in USDC on Arc Network Testnet</p>
+              <h2 className="text-base font-semibold text-slate-900">{initial ? 'Edit Invoice' : 'New Invoice'}</h2>
+              <p className="text-xs text-slate-400 mt-0.5">Bill your client in USDC on Arc Network Testnet</p>
             </div>
-            <button onClick={onClose} className="w-8 h-8 rounded-lg glass border border-white/[0.08] flex items-center justify-center text-white/40 hover:text-white transition-colors">
+            <button onClick={onClose} className="w-8 h-8 rounded-lg glass border border-slate-200 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors">
               <X className="w-4 h-4" />
             </button>
           </div>
@@ -95,85 +95,85 @@ export default function CreateInvoiceModal({ onClose, onSave, initial }: Props) 
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-white/50 mb-1.5">Client Name *</label>
+                  <label className="block text-xs font-medium text-slate-500 mb-1.5">Client Name *</label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30" />
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
                     <input value={form.client} onChange={e => set('client', e.target.value)}
                       placeholder="Acme Corp"
-                      className={`w-full bg-white/[0.04] border rounded-xl pl-9 pr-3 py-2.5 text-sm text-white placeholder-white/20 outline-none transition-all ${errors.client ? 'border-red-500/50' : 'border-white/[0.08] focus:border-indigo-500/50'}`} />
+                      className={`w-full bg-surface-50 border rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 placeholder-slate-300 outline-none transition-all ${errors.client ? 'border-red-400' : 'border-slate-200 focus:border-brand-400'}`} />
                   </div>
-                  {errors.client && <p className="text-[11px] text-red-400 mt-1">{errors.client}</p>}
+                  {errors.client && <p className="text-[11px] text-red-500 mt-1">{errors.client}</p>}
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-white/50 mb-1.5">Client Email *</label>
+                  <label className="block text-xs font-medium text-slate-500 mb-1.5">Client Email *</label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30" />
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
                     <input value={form.clientEmail} onChange={e => set('clientEmail', e.target.value)}
                       placeholder="billing@acme.com" type="email"
-                      className={`w-full bg-white/[0.04] border rounded-xl pl-9 pr-3 py-2.5 text-sm text-white placeholder-white/20 outline-none transition-all ${errors.clientEmail ? 'border-red-500/50' : 'border-white/[0.08] focus:border-indigo-500/50'}`} />
+                      className={`w-full bg-surface-50 border rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 placeholder-slate-300 outline-none transition-all ${errors.clientEmail ? 'border-red-400' : 'border-slate-200 focus:border-brand-400'}`} />
                   </div>
-                  {errors.clientEmail && <p className="text-[11px] text-red-400 mt-1">{errors.clientEmail}</p>}
+                  {errors.clientEmail && <p className="text-[11px] text-red-500 mt-1">{errors.clientEmail}</p>}
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-white/50 mb-1.5">Description *</label>
+                <label className="block text-xs font-medium text-slate-500 mb-1.5">Description *</label>
                 <div className="relative">
-                  <FileText className="absolute left-3 top-3 w-3.5 h-3.5 text-white/30" />
+                  <FileText className="absolute left-3 top-3 w-3.5 h-3.5 text-slate-400" />
                   <textarea value={form.description} onChange={e => set('description', e.target.value)}
                     placeholder="Services rendered for Q1 2025 — Software development..."
                     rows={2}
-                    className={`w-full bg-white/[0.04] border rounded-xl pl-9 pr-3 py-2.5 text-sm text-white placeholder-white/20 outline-none transition-all resize-none ${errors.description ? 'border-red-500/50' : 'border-white/[0.08] focus:border-indigo-500/50'}`} />
+                    className={`w-full bg-surface-50 border rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 placeholder-slate-300 outline-none transition-all resize-none ${errors.description ? 'border-red-400' : 'border-slate-200 focus:border-brand-400'}`} />
                 </div>
-                {errors.description && <p className="text-[11px] text-red-400 mt-1">{errors.description}</p>}
+                {errors.description && <p className="text-[11px] text-red-500 mt-1">{errors.description}</p>}
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-white/50 mb-1.5">Amount (USDC) *</label>
+                  <label className="block text-xs font-medium text-slate-500 mb-1.5">Amount (USDC) *</label>
                   <div className="relative">
-                    <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30" />
+                    <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
                     <input value={form.amount} onChange={e => set('amount', e.target.value)}
                       placeholder="5000" type="number" min="0" step="0.01"
-                      className={`w-full bg-white/[0.04] border rounded-xl pl-9 pr-3 py-2.5 text-sm text-white placeholder-white/20 outline-none transition-all ${errors.amount ? 'border-red-500/50' : 'border-white/[0.08] focus:border-indigo-500/50'}`} />
+                      className={`w-full bg-surface-50 border rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 placeholder-slate-300 outline-none transition-all ${errors.amount ? 'border-red-400' : 'border-slate-200 focus:border-brand-400'}`} />
                   </div>
-                  {errors.amount && <p className="text-[11px] text-red-400 mt-1">{errors.amount}</p>}
+                  {errors.amount && <p className="text-[11px] text-red-500 mt-1">{errors.amount}</p>}
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-white/50 mb-1.5">Due Date *</label>
+                  <label className="block text-xs font-medium text-slate-500 mb-1.5">Due Date *</label>
                   <div className="relative">
-                    <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30" />
+                    <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
                     <input value={form.dueDate} onChange={e => set('dueDate', e.target.value)}
                       type="date"
-                      className={`w-full bg-white/[0.04] border rounded-xl pl-9 pr-3 py-2.5 text-sm text-white outline-none transition-all ${errors.dueDate ? 'border-red-500/50' : 'border-white/[0.08] focus:border-indigo-500/50'}`} />
+                      className={`w-full bg-surface-50 border rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 outline-none transition-all ${errors.dueDate ? 'border-red-400' : 'border-slate-200 focus:border-brand-400'}`} />
                   </div>
-                  {errors.dueDate && <p className="text-[11px] text-red-400 mt-1">{errors.dueDate}</p>}
+                  {errors.dueDate && <p className="text-[11px] text-red-500 mt-1">{errors.dueDate}</p>}
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-white/50 mb-1.5">Recipient Wallet (for USDC payment)</label>
+                <label className="block text-xs font-medium text-slate-500 mb-1.5">Recipient Wallet (for USDC payment)</label>
                 <div className="relative">
-                  <Wallet className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30" />
+                  <Wallet className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
                   <input value={form.walletAddress} onChange={e => set('walletAddress', e.target.value)}
                     placeholder="0x..."
-                    className={`w-full bg-white/[0.04] border rounded-xl pl-9 pr-3 py-2.5 text-sm text-white font-mono placeholder-white/20 outline-none transition-all ${errors.walletAddress ? 'border-red-500/50' : 'border-white/[0.08] focus:border-indigo-500/50'}`} />
+                    className={`w-full bg-surface-50 border rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 font-mono placeholder-slate-300 outline-none transition-all ${errors.walletAddress ? 'border-red-400' : 'border-slate-200 focus:border-brand-400'}`} />
                 </div>
-                {errors.walletAddress && <p className="text-[11px] text-red-400 mt-1">{errors.walletAddress}</p>}
+                {errors.walletAddress && <p className="text-[11px] text-red-500 mt-1">{errors.walletAddress}</p>}
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-white/50 mb-1.5">Status</label>
+                <label className="block text-xs font-medium text-slate-500 mb-1.5">Status</label>
                 <select value={form.status} onChange={e => set('status', e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2.5 text-sm text-white outline-none focus:border-indigo-500/50 transition-all appearance-none capitalize">
-                  {STATUSES.map(s => <option key={s} value={s} className="bg-[#0d0e1a] capitalize">{s}</option>)}
+                  className="w-full bg-surface-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-900 outline-none focus:border-brand-400 transition-all appearance-none capitalize">
+                  {STATUSES.map(s => <option key={s} value={s} className="bg-white capitalize">{s}</option>)}
                 </select>
               </div>
             </div>
 
-            <div className="px-6 py-4 border-t border-white/[0.07] flex items-center gap-3 flex-shrink-0">
+            <div className="px-6 py-4 border-t border-slate-100 flex items-center gap-3 flex-shrink-0">
               <button type="button" onClick={onClose}
-                className="flex-1 py-2.5 rounded-xl glass border border-white/[0.08] text-sm text-white/60 hover:text-white transition-all">
+                className="flex-1 py-2.5 rounded-xl glass border border-slate-200 text-sm text-slate-500 hover:text-slate-900 transition-all">
                 Cancel
               </button>
               <button type="submit" disabled={saving}
