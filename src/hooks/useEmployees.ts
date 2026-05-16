@@ -50,7 +50,7 @@ export function useEmployees() {
     setEmployees(list)
   }
 
-  const addEmployee = (data: Omit<Employee, 'id' | 'avatar' | 'joinDate'>) => {
+  const addEmployee = async (data: Omit<Employee, 'id' | 'avatar' | 'joinDate'>) => {
     const emp: Employee = {
       ...data,
       id: crypto.randomUUID(),
@@ -58,6 +58,39 @@ export function useEmployees() {
       joinDate: new Date().toISOString().split('T')[0],
     }
     save([...employees, emp])
+
+    // Resolve org name: settings > wallet address
+    let employerName = 'Your Employer'
+    if (address) {
+      try {
+        const settings = localStorage.getItem(`arcpay_settings_${address.toLowerCase()}`)
+        if (settings) {
+          const parsed = JSON.parse(settings)
+          if (parsed.orgName) employerName = parsed.orgName
+        }
+      } catch {}
+      if (employerName === 'Your Employer') {
+        employerName = `${address.slice(0, 6)}…${address.slice(-4)}`
+      }
+    }
+
+    // Fire onboarding email (non-blocking)
+    try {
+      await fetch('/api/send-onboarding', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          employeeName: emp.name,
+          employeeEmail: emp.email,
+          role: emp.role,
+          department: emp.department,
+          employerName,
+        }),
+      })
+    } catch {
+      // Email failure is non-fatal
+    }
+
     return emp
   }
 

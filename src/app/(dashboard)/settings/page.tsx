@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Header from '@/components/dashboard/Header'
+import { useAccount } from 'wagmi'
 import {
   User, Building2, Shield, Bell, Wallet,
   Check, Zap
@@ -18,11 +19,30 @@ const tabs: { id: SettingsTab; label: string; icon: typeof User }[] = [
 ]
 
 export default function SettingsPage() {
+  const { address } = useAccount()
   const [activeTab, setActiveTab] = useState<SettingsTab>('profile')
   const [saved, setSaved] = useState(false)
+  const [orgSettings, setOrgSettings] = useState({
+    orgName: '',
+    industry: '',
+    companySize: '',
+    headquarters: '',
+  })
+
+  // Load org settings from localStorage
+  useEffect(() => {
+    if (!address) return
+    try {
+      const raw = localStorage.getItem(`arcpay_settings_${address.toLowerCase()}`)
+      if (raw) setOrgSettings(prev => ({ ...prev, ...JSON.parse(raw) }))
+    } catch {}
+  }, [address])
 
   const save = async () => {
-    await new Promise(r => setTimeout(r, 600))
+    if (address && activeTab === 'organization') {
+      localStorage.setItem(`arcpay_settings_${address.toLowerCase()}`, JSON.stringify(orgSettings))
+    }
+    await new Promise(r => setTimeout(r, 400))
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
   }
@@ -105,18 +125,21 @@ export default function SettingsPage() {
 
               {activeTab === 'organization' && (
                 <div className="glass rounded-2xl border border-slate-100 p-6">
-                  <h3 className="text-sm font-semibold text-slate-900 mb-5">Organization Settings</h3>
+                  <h3 className="text-sm font-semibold text-slate-900 mb-1">Organization Settings</h3>
+                  <p className="text-xs text-slate-400 mb-5">Company Name is used in employee onboarding emails.</p>
                   <div className="space-y-4">
                     {[
-                      { label: 'Company Name', placeholder: 'Your company name' },
-                      { label: 'Industry', placeholder: 'e.g. Web3 / Fintech' },
-                      { label: 'Company Size', placeholder: 'e.g. 1–10 employees' },
-                      { label: 'Headquarters', placeholder: 'City, Country' },
-                    ].map(({ label, placeholder }) => (
-                      <div key={label}>
+                      { label: 'Company Name', key: 'orgName', placeholder: 'Your company name' },
+                      { label: 'Industry', key: 'industry', placeholder: 'e.g. Web3 / Fintech' },
+                      { label: 'Company Size', key: 'companySize', placeholder: 'e.g. 1–10 employees' },
+                      { label: 'Headquarters', key: 'headquarters', placeholder: 'City, Country' },
+                    ].map(({ label, key, placeholder }) => (
+                      <div key={key}>
                         <label className="block text-xs font-medium text-slate-500 mb-2">{label}</label>
                         <input
                           placeholder={placeholder}
+                          value={orgSettings[key as keyof typeof orgSettings]}
+                          onChange={e => setOrgSettings(prev => ({ ...prev, [key]: e.target.value }))}
                           className="w-full bg-surface-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-300 outline-none focus:border-brand-400 transition-all"
                         />
                       </div>
