@@ -6,13 +6,14 @@ import { motion } from 'framer-motion'
 import {
   Zap, LayoutDashboard, Users, CreditCard, Briefcase,
   Vault, FileText, Brain, BarChart3, Settings, LogOut,
-  Shield, Wallet
+  Shield, Wallet, Clock
 } from 'lucide-react'
 
 const navItems = [
   { label: 'Overview', href: '/dashboard', icon: LayoutDashboard },
   { label: 'Employees', href: '/employees', icon: Users },
   { label: 'Payroll', href: '/payroll', icon: CreditCard },
+  { label: 'Attendance', href: '/attendance', icon: Clock, badge: 'New' },
   { label: 'Hiring', href: '/hiring', icon: Briefcase },
   { label: 'Treasury', href: '/treasury', icon: Vault },
   { label: 'Invoices', href: '/invoices', icon: FileText },
@@ -40,7 +41,7 @@ export default function Sidebar() {
       {/* Nav */}
       <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto no-scrollbar">
         <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest px-3 mb-3">Main</div>
-        {navItems.slice(0, 6).map((item) => {
+        {navItems.slice(0, 7).map((item) => {
           const Icon = item.icon
           const active = pathname === item.href || (item.href !== '/dashboard' && pathname?.startsWith(item.href))
           return (
@@ -66,7 +67,7 @@ export default function Sidebar() {
         })}
 
         <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest px-3 mt-5 mb-3">Tools</div>
-        {navItems.slice(6).map((item) => {
+        {navItems.slice(7).map((item) => {
           const Icon = item.icon
           const active = pathname === item.href || pathname?.startsWith(item.href)
           return (
