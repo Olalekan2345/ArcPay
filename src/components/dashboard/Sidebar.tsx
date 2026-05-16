@@ -3,10 +3,11 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import {
   Zap, LayoutDashboard, Users, CreditCard, Briefcase,
   Vault, FileText, Brain, BarChart3, Settings, LogOut,
-  Shield, Wallet, Clock
+  Shield, Wallet, Clock, ExternalLink
 } from 'lucide-react'
 
 const navItems = [
@@ -100,6 +101,20 @@ export default function Sidebar() {
 
       {/* Bottom section */}
       <div className="p-3 border-t border-slate-100 space-y-2">
+        {/* Employee portal link */}
+        <Link
+          href="/employee"
+          target="_blank"
+          className="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-slate-200 hover:border-brand-300 hover:bg-brand-50 transition-all group"
+        >
+          <Users className="w-3.5 h-3.5 text-slate-400 group-hover:text-brand-600" />
+          <div className="flex-1 min-w-0">
+            <div className="text-[10px] font-medium text-slate-500 group-hover:text-brand-700">Employee Portal</div>
+            <div className="text-[9px] text-slate-300 group-hover:text-brand-500">Share with your team</div>
+          </div>
+          <ExternalLink className="w-3 h-3 text-slate-300 group-hover:text-brand-500" />
+        </Link>
+
         {/* Privacy status */}
         <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-brand-50 border border-brand-200">
           <Shield className="w-3.5 h-3.5 text-brand-600" />
